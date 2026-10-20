@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>你的身體，每天在扛多少？｜不痛生活改造局</title>
+<meta name="description" content="28 題，8 分鐘。看懂你的職場負荷落在哪一格，以及為什麼你每次想改都撐不久。">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF8F5; --paper2:#F4F1EA; --ink:#181A19; --ink2:#2C302E; --ink3:#8A857C;
+  --line:#E6E1D6; --card:#FFFFFF;
+  --a:#B4472C; --a-soft:#F4E4DE;
+  --b:#1E5641; --b-soft:#EBF3EE;
+  --warn:#8C5A12; --warn-soft:#F7EAD3;
+  --r:16px;
+  --f:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Microsoft JhengHei",sans-serif;
+  --fs:"Noto Serif TC",Georgia,serif;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --paper:#131211; --paper2:#1A1917; --ink:#F2EEE6; --ink2:#BCB4A8; --ink3:#7E766B;
+    --line:#2E2B27; --card:#1D1B18;
+    --a:#E08464; --a-soft:#33211B;
+    --b:#63A98C; --b-soft:#16261F;
+    --warn:#DDA94F; --warn-soft:#2E2415;
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--f);
+  font-size:16.5px; line-height:1.8; letter-spacing:.01em;
+  min-height:100vh; display:flex; justify-content:center;
+  padding:0 0 env(safe-area-inset-bottom);
+}
+#app{width:100%; max-width:680px; padding:0 22px 64px}
+button{font-family:inherit; font-size:inherit; cursor:pointer; border:0; background:none; color:inherit}
+.appear{animation:up .42s cubic-bezier(.22,.7,.3,1) both}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.top{display:flex;align-items:center;justify-content:space-between;padding:20px 0 0;position:sticky;top:0;background:var(--paper);z-index:10}
+.brand{font-size:12.5px;font-weight:700;letter-spacing:.14em;color:var(--ink3)}
+.brand i{font-style:normal;color:var(--b)}
+.save{font-size:11.5px;color:var(--ink3);letter-spacing:.06em;opacity:0;transition:opacity .3s}
+.save.on{opacity:1}
+
+.bar{height:2px;background:var(--line);margin:16px 0 0;overflow:hidden;border-radius:2px}
+.bar>i{display:block;height:100%;width:0;background:var(--b);transition:width .45s cubic-bezier(.4,0,.2,1)}
+.meta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink3);letter-spacing:.08em;margin-top:9px}
+
+.sec-tag{display:inline-block;font-size:11.5px;letter-spacing:.16em;color:var(--b);font-weight:700;margin:32px 0 6px}
+.q{font-family:var(--fs);font-size:25px;line-height:1.5;font-weight:900;letter-spacing:0;margin:0 0 8px}
+.q small{display:block;font-size:13.5px;line-height:1.7;font-weight:400;color:var(--ink3);letter-spacing:0;margin-top:9px}
+.fields{display:flex;flex-direction:column;gap:26px;margin-top:24px}
+.field{opacity:.55;transition:opacity .3s}
+.field.done{opacity:1}
+.f-label{font-size:14.5px;font-weight:700;margin-bottom:12px;display:flex;gap:7px;align-items:baseline;flex-wrap:wrap}
+.hint{font-size:12px;font-weight:400;color:var(--ink3);margin-left:auto}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:100px;padding:9px 17px;
+  font-size:14px;font-weight:600;color:var(--ink2);transition:all .18s}
+.chip:active{transform:scale(.96)}
+.chip.on{border-color:var(--b);background:var(--b);color:#fff}
+
+.stack{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:11px;align-items:flex-start;text-align:left;border:1.5px solid var(--line);
+  background:var(--card);border-radius:12px;padding:12px 14px;font-size:14.5px;color:var(--ink2);transition:all .18s}
+.opt:active{transform:scale(.99)}
+.opt.on{border-color:var(--b);background:var(--b-soft);color:var(--ink);font-weight:600}
+.tick{flex:0 0 18px;height:18px;border-radius:5px;border:1.5px solid var(--line);margin-top:2px;
+  display:grid;place-items:center;transition:all .18s}
+.opt.on .tick{border-color:var(--b);background:var(--b)}
+.tick::after{content:"";width:8px;height:4px;border:2px solid #fff;border-top:0;border-right:0;
+  transform:rotate(-45deg) translateY(-1px);opacity:0}
+.opt.on .tick::after{opacity:1}
+
+.numwrap{display:flex;align-items:center;gap:10px;border-bottom:2px solid var(--line);padding-bottom:8px;transition:border-color .2s}
+.numwrap:focus-within{border-color:var(--b)}
+.numwrap input{flex:0 0 auto;width:3.6em;border:0;background:none;font:inherit;font-size:22px;font-weight:700;color:var(--ink);outline:none;text-align:left}
+.numwrap input::placeholder{color:var(--ink3);font-weight:400;font-size:15px}
+.numwrap span{font-size:13px;color:var(--ink3);font-weight:600}
+.err{font-size:12px;color:var(--a);margin-top:8px;display:none}
+.err.on{display:block}
+
+.nav{display:flex;gap:10px;align-items:center;margin-top:38px}
+.btn{background:var(--b);color:#fff;border-radius:10px;padding:15px 26px;font-size:15px;
+  font-weight:700;letter-spacing:.02em;transition:all .2s;flex:1;text-align:center}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:none;color:var(--ink3);flex:0 0 auto;padding:15px 12px;font-weight:600}
+.btn[disabled]{opacity:.35;cursor:not-allowed}
+.btn.accent{background:#143E2E;color:#fff}
+
+.hero{margin-top:26px}
+.hero .kicker{font-size:11.5px;letter-spacing:.18em;color:var(--ink3);font-weight:700}
+.hero .block{font-size:15px;font-weight:700;margin-top:16px;letter-spacing:.06em}
+.hero h1{font-family:var(--fs);font-size:32px;line-height:1.35;font-weight:900;letter-spacing:0;margin:8px 0 0}
+.hero .lede{font-size:16.5px;line-height:1.8;color:var(--ink2);margin-top:16px}
+.matrix{display:flex;gap:12px;align-items:center;margin-top:24px;padding:16px;background:var(--card);
+  border:1.5px solid var(--line);border-radius:var(--r)}
+.grid2x3{display:grid;grid-template-columns:1fr 1fr;gap:5px;flex:0 0 132px}
+.cell{height:30px;border-radius:6px;background:var(--paper2);display:grid;place-items:center;
+  font-size:10px;font-weight:700;color:var(--ink3);letter-spacing:0}
+.cell.on{color:#fff;transform:scale(1.04)}
+.matrix .side{font-size:12.5px;line-height:1.7;color:var(--ink2)}
+.matrix .side b{display:block;color:var(--ink);font-size:13.5px;margin-bottom:3px}
+
+.warn{margin-top:22px;padding:18px;border-radius:var(--r);background:var(--warn-soft);border:1.5px solid var(--warn)}
+.warn h3{margin:0 0 8px;font-size:15px;color:var(--warn);font-weight:800;letter-spacing:.02em}
+.warn p{margin:0;font-size:14px;line-height:1.8;color:var(--ink2)}
+
+.verdict{margin-top:20px;font-size:19px;line-height:1.7;font-weight:700;letter-spacing:-.01em}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.tag{font-size:12px;font-weight:700;letter-spacing:.02em;padding:5px 11px;border-radius:100px;
+  background:var(--b-soft);color:var(--b)}
+
+.paths{display:flex;gap:10px;margin:0 0 26px}
+.path{flex:1;display:block;padding:12px 14px;border-radius:var(--r);
+  border:1.5px solid var(--line);background:var(--card);text-decoration:none;color:inherit}
+.path b{display:block;font-size:14px;font-weight:800;color:var(--ink2)}
+.path span{display:block;font-size:11.5px;color:var(--ink3);margin-top:4px;line-height:1.55}
+.path.on{border-color:var(--b);background:var(--b-soft)}
+.path.on b{color:var(--b)}
+
+.xlink{display:block;margin-top:26px;padding:16px 18px;border-radius:var(--r);
+  border:1.5px solid var(--line);background:var(--card);text-decoration:none}
+.xlink b{display:block;font-size:14px;font-weight:800;color:var(--b)}
+.xlink span{display:block;font-size:13px;line-height:1.7;color:var(--ink2);margin-top:5px}
+.hr{height:1px;background:var(--line);margin:32px 0 0}
+.s-title{font-size:12px;letter-spacing:.16em;color:var(--ink3);font-weight:800;margin:34px 0 14px}
+.moves{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px}
+.moves li{display:flex;gap:14px;align-items:flex-start}
+.moves i{flex:0 0 26px;height:26px;border-radius:50%;background:var(--ink);color:var(--paper);
+  font-style:normal;font-size:12.5px;font-weight:800;display:grid;place-items:center;margin-top:3px}
+.moves b{display:block;font-size:15.5px;font-weight:800;margin-bottom:3px}
+.moves p{margin:0;font-size:14px;line-height:1.8;color:var(--ink2)}
+.quote{border-left:3px solid var(--a);padding:4px 0 4px 18px;margin-top:30px;font-size:17px;
+  line-height:1.75;font-weight:700;color:var(--ink)}
+
+.nums{margin-top:14px;display:flex;flex-direction:column}
+.row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+  padding:15px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row .k{font-size:14.5px;font-weight:700}
+.row .k small{display:block;font-size:11.5px;font-weight:400;color:var(--ink3);line-height:1.65;margin-top:3px}
+.row .v{font-size:19px;font-weight:900;white-space:nowrap;letter-spacing:-.01em}
+.row .v em{font-style:normal;font-size:11.5px;font-weight:700;color:var(--ink3);margin-left:3px}
+
+.proof{margin-top:16px;padding:18px;background:var(--card);border:1.5px solid var(--line);border-radius:var(--r)}
+.proof p{margin:0 0 10px;font-size:14px;line-height:1.8;color:var(--ink2)}
+.proof cite{font-style:normal;font-size:12px;font-weight:700;color:var(--ink3)}
+
+.cta{margin-top:34px;padding:24px;border-radius:var(--r);background:var(--b);color:#fff}
+.cta h3{margin:0;font-size:19px;font-weight:900;letter-spacing:-.01em;line-height:1.45}
+.cta p{margin:9px 0 0;font-size:13.5px;line-height:1.8;opacity:.72}
+.cta a{display:block;text-align:center;margin-top:18px;background:var(--paper);color:#143E2E;
+  border-radius:100px;padding:14px;font-size:15px;font-weight:800;text-decoration:none}
+.cta .note{font-size:11px;opacity:.45;text-align:center;margin-top:11px}
+
+.gate{margin-top:20px;padding:24px;border-radius:var(--r);background:var(--card);border:1.5px solid var(--line)}
+.gate h3{margin:0;font-size:16.5px;font-weight:800}
+.gate p{margin:7px 0 0;font-size:13.5px;line-height:1.8;color:var(--ink2)}
+.gate input{width:100%;margin-top:16px;border:1.5px solid var(--line);background:var(--paper);
+  border-radius:11px;padding:13px 14px;font:inherit;font-size:15px;color:var(--ink);outline:none}
+.gate input:focus{border-color:var(--b)}
+.gate .btn{width:100%;margin-top:10px}
+.gate .ok{font-size:13.5px;color:var(--b);font-weight:700;margin-top:12px;display:none}
+.gate .ok.on{display:block}
+.privacy{font-size:11px;color:var(--ink3);margin-top:11px;line-height:1.7}
+
+.share{margin-top:22px;display:flex;gap:10px}
+.share button{flex:1;padding:13px;border-radius:100px;border:1.5px solid var(--line);
+  font-size:13.5px;font-weight:700;color:var(--ink2)}
+.share button:active{transform:scale(.98)}
+
+.foot{margin-top:36px;font-size:11.5px;line-height:1.85;color:var(--ink3)}
+.foot .again{display:inline-block;margin-top:14px;text-decoration:underline;font-weight:700;color:var(--ink2)}
+
+.intro h1{font-family:var(--fs);font-size:30px;line-height:1.4;font-weight:900;letter-spacing:0;margin:30px 0 0}
+.intro .lede{font-size:16px;line-height:1.85;color:var(--ink2);margin-top:16px}
+.intro .bullets{margin:22px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+.intro .bullets li{font-size:14.5px;line-height:1.7;color:var(--ink2);padding-left:22px;position:relative}
+.intro .bullets li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;
+  border-radius:50%;background:var(--b)}
+.intro .who{margin-top:26px;padding:16px 18px;background:var(--card);border-radius:var(--r);
+  border-left:3px solid var(--b);font-size:13.5px;line-height:1.8;color:var(--ink2)}
+.embed body{background:transparent}
+.embed .top{background:transparent;position:static;padding-top:0}
+.embed #app{padding-bottom:24px}</style>
+</head>
+<body>
+<div id="app">
+  <div class="top">
+    <div class="brand">不痛生活改造局 <i>／</i> 身體負荷檢測</div>
+    <div class="save" id="save">已自動儲存</div>
+  </div>
+  <div id="body"></div>
+</div>
+
+<script>
+var CONFIG = {
+  brand: "不痛生活改造局",
+  site: "ergopt.blogspot.com",
+  courseName: "1 小時線上環境改造：告別工作與生活的全身痠痛",
+  courseDesc: "Noah｜人因工程師 × 物理治療師。用一小時看完你的工作與生活環境，找出真正在偷走你身體的那幾件事。",
+  ctaLabel: "預約 1 小時線上環境改造",
+  ctaUrl: "https://portaly.cc/cola_pt",
+  endpoint: "",
+  pdfName: "身體負荷檢測_完整版.pdf",
+  storageKey: "ergo-load-quiz-v1",
+  proofEnabled: false
+};
+
+var PROOF = [
+  { text: "本來以為是體重問題，結果是每天搬貨的方式。改成貼身搬之後，下背兩個月沒再抽。", who: "物流組長，43 歲" },
+  { text: "我是坐整天的。與其去健身房，先把椅子跟螢幕弄對，肩頸就差很多。", who: "會計，38 歲" }
+];
+
+var ORDER = ["loop", "clock", "push"];
+var AXIS_NAME = { push: "硬撐", clock: "沒空", loop: "反覆" };
+var BASES = {
+  load: { name: "扛重", side: "身體每天在對抗重量" },
+  held: { name: "定格", side: "身體卡在同一個位置" }
+};
+
+var TYPES = {
+  "load-push": {
+    name: "扛重硬撐型",
+    lede: "你的身體不是不耐用，是你一直把「忍」當作保養。重量沒少，休息沒多，等到真的壞掉才停。",
+    verdict: "你扛得動，所以你從來不覺得需要改。問題是「扛得動」跟「扛得住十年」是兩件事。",
+    tags: ["忍耐當常態", "痛了照做", "休息等於偷懶", "重量不會自己變輕"],
+    moves: [
+      { t: "先改搬法，不要先減重", d: "把重量貼近身體、膝蓋先彎、不扭腰。同一件貨換個抱法，腰椎受力可以差到三成以上。這是最快能看到差別的一步。" },
+      { t: "設一條「今天不搬」的線", d: "不是等痛才停，是事先講好：超過幾公斤分兩趟、痛到幾分就不做。有線的人撐得久，沒線的人靠意志力，意志力會用完。" },
+      { t: "每週兩次，練「撐得住」的能力", d: "不是練大塊，是練核心穩定跟髖主導。硬舉、分腿蹲、農夫走路，重量輕、動作對就好。扛重的人最缺的不是力量，是穩定。" }
+    ],
+    pull: "你不是不夠努力，你是把努力全花在「撐住」，沒有留一點給「變強」。",
+    block: "你在用意志力補身體的缺口。意志力有上限，身體沒有。"
+  },
+  "load-clock": {
+    name: "扛重沒空型",
+    lede: "你知道該調整，也知道怎麼調整，但每天回到家只剩力氣滑手機。不是不想，是排不進去。",
+    verdict: "你的問題不是知識，是時間。而時間不會自己空出來，只能被換出來。",
+    tags: ["知道但做不到", "回家只想躺", "假日補眠", "一直在等有空"],
+    moves: [
+      { t: "把處方縮到 90 秒", d: "不要排「運動 30 分鐘」，排「搬完貨做 90 秒髖屈肌伸展」。做得到的 90 秒，勝過做不到的 30 分鐘。" },
+      { t: "綁在既有動作上，不要另開時段", d: "上車前、打卡後、洗完澡。新習慣要掛在舊習慣後面，才不會被忙掉。" },
+      { t: "跟同事一起改工作現場", d: "一個人的休息叫偷懶，兩個人的休息叫流程。把抬升台車、縮短搬運距離變成團隊的事，你才不會覺得自己在偷時間。" }
+    ],
+    pull: "你不是沒時間，你的時間被「撐完這一天」吃光了。",
+    block: "你在等一段完整時間，但完整的時間永遠不會來。"
+  },
+  "load-loop": {
+    name: "扛重反覆型",
+    lede: "好一陣子、壞一陣子，每次都是痛到不行才處理，好了就忘記。問題不在你，在方法只處理了症狀。",
+    verdict: "反覆發作代表根源沒動。你修的是結果，不是原因。",
+    tags: ["好了就忘", "痛了才處理", "一直在重來", "每次都從零開始"],
+    moves: [
+      { t: "找出你的復發前兆", d: "每次壞掉前，身體一定有先講話：某個角度會痠、某天早上比較僵。把它寫下來，那是你的預警燈。" },
+      { t: "把「不痛」當起點，不是終點", d: "不痛之後的四到六週才是關鍵期，要練回負荷能力。多數人在這裡收工，所以八週後又回來。" },
+      { t: "改一件工作現場的事", d: "抬升高度、減少扭轉、換手、換鞋。只改身體不改環境，等於在漏水的地板上拖地。" }
+    ],
+    pull: "你不是復原力差，你是每次都只修到「不痛」就收工。",
+    block: "你把「不痛」當成結束，它其實只是中場。"
+  },
+  "held-push": {
+    name: "定格硬撐型",
+    lede: "你沒搬重物，但你的身體一整天維持同一個姿勢。定格比出力更耗，因為肌肉一直在微微收縮。",
+    verdict: "不動的傷害比動更慢、更隱形。你撐得住，所以你不會發現自己正在累積。",
+    tags: ["久坐久站", "肩頸先抗議", "忍到下班", "姿勢越坐越歪"],
+    moves: [
+      { t: "每 30 分鐘起身一次，不是每 2 小時", d: "肌肉的疲勞是累積的，太晚起身已經來不及。起身 30 秒就夠，重點是頻率不是長度。" },
+      { t: "先把椅子跟螢幕弄對", d: "螢幕上緣跟眼睛同高、手肘 90 度、腳踩得到地。這三件做完，肩頸的日常負荷立刻下降，而且不用花錢。" },
+      { t: "把「不動」的反面練回來", d: "定格型最缺的是活動度跟穩定交替。每天兩分鐘：胸椎轉體、髖屈肌伸展、臀中肌啟動。少，但每天。" }
+    ],
+    pull: "不動，也是一種出力。而且它不會喘，所以你更不會停。",
+    block: "你在用同一個姿勢撐完八小時，身體沒有第二種選擇。"
+  },
+  "held-clock": {
+    name: "定格沒空型",
+    lede: "你知道久坐不好，但會議接著會議，起來走動會被覺得在摸魚。這不是意志問題，是環境問題。",
+    verdict: "在一個鼓勵坐著的環境裡，你很難自己站起來。所以要改的是環境，不是決心。",
+    tags: ["會議馬拉松", "不敢離開座位", "下班才發現肩頸硬", "一直往後延"],
+    moves: [
+      { t: "把站立變成會議的一部分", d: "站立會議、走動討論、電話站著講。不是每個會都要坐，第一個改的人通常會發現沒人在意。" },
+      { t: "設三個「非自願起身」", d: "裝水、上廁所、影印，選最遠的那一台。用工作流程逼自己動，比提醒自己有用。" },
+      { t: "桌面只做一件調整", d: "只要一件：螢幕墊高，或鍵盤拉近，或椅子調低。改太多會撐不住，改一件會留下來。" }
+    ],
+    pull: "你不是懶得動，是你的位子不允許你動。",
+    block: "你把「起來走動」當成休息，所以永遠排在最後。"
+  },
+  "held-loop": {
+    name: "定格反覆型",
+    lede: "肩頸或腰痠好了又來，你換過枕頭、買過護具、去過推拿，每次有效一陣子。因為被處理的是症狀。",
+    verdict: "反覆的痠，通常不是哪裡壞了，而是每天都在同一個位置加載。",
+    tags: ["換過很多方法", "有效一陣子", "一直重來", "越處理越依賴"],
+    moves: [
+      { t: "先記錄「什麼時候最痠」", d: "是下午三點？還是開完某種會？找到時間點，就找到動作模式。沒有記錄的調整都是猜。" },
+      { t: "把放鬆換成訓練", d: "推拿、滾筒、貼布都是暫時的。要讓它不回來，得讓那個部位有承受能力：頸深層屈肌、下斜方、臀中肌。" },
+      { t: "改一個每天都重複的動作", d: "滑鼠位置、手機高度、椅子深度。每天重複五百次的小動作，比一次三十公斤的錯誤更有殺傷力。" }
+    ],
+    pull: "不是你體質差，是你每天都在同一個地方繳一樣的稅。",
+    block: "你一直在處理「痠」，沒有處理「為什麼同一個地方會痠」。"
+  }
+};
+
+var SPECIAL = {
+  under: {
+    name: "肌力起步型",
+    lede: "你的 BMI 低於 18.5。在這個狀態下談減重、談負荷上限，方向是錯的——你需要的不是更輕，是更多可以扛的本錢。",
+    verdict: "體重偏低的人，肌肉量通常也不足。同樣的搬運工作，你的身體要用更高的相對強度去完成。",
+    tags: ["體重偏低", "本錢不足", "先練再談", "不要減重"],
+    moves: [
+      { t: "先把熱量與蛋白質補到位", d: "每天每公斤體重 1.2 到 1.6 克蛋白質，三餐都要有。體重偏低時，吃夠比練多更關鍵。" },
+      { t: "練大動作，不要練器材", d: "深蹲、髖鉸鏈、推、拉。一次動作帶動多個關節，對增加可用肌肉量最有效率。" },
+      { t: "搬運方式先改，重量慢慢加", d: "現在的你更容易在搬運中受傷，因為肌肉的保護不足。先改技巧，再逐步增加能承受的重量。" }
+    ],
+    pull: "你要的不是變輕，是變得更能扛。",
+    block: "你在用不足的本錢，做一樣份量的工作。"
+  },
+  keep: {
+    name: "維持型",
+    lede: "三個向度都沒有明顯負荷訊號。這不代表你永遠不會有事，代表你現在的做法是有效的。",
+    verdict: "多數人是在「還沒出事」的時候開始保養，才不用在「已經出事」的時候補救。你現在正好在那個最好的位置。",
+    tags: ["目前沒警訊", "做法有效", "預防勝於補救", "別让它變問題"],
+    moves: [
+      { t: "把現在做對的事記下來", d: "你現在一定有些習慣是對的。寫下來，因為換工作、換座位、換年齡時，這些會第一個被犧牲。" },
+      { t: "每半年做一次這件事", d: "同樣的題目再填一次。變化比絕對值有意義，退步的早期訊號只有比較才看得到。" },
+      { t: "提前處理以後會找你的那一項", d: "搬重、久坐、重複動作，三者你總有一項佔比最高。現在改善的成本，是將來的十分之一。" }
+    ],
+    pull: "你現在沒有問題，這是最好的時間點。",
+    block: "沒有警訊，不代表沒有累積。"
+  }
+};
+
+var SECS = ["先認識你的身體", "你的負荷從哪來", "你想換到哪裡", "身體還剩下什麼", "哪些零件在抗議", "為什麼卡住", "最後一件事"];
+
+var HEAD = [
+  ["先認識你的身體與工作。", "這幾題影響最大，決定你落在哪一格。"],
+  ["你的負荷，從哪裡來？", "不用精算，抓個大概就好。"],
+  ["你想換到哪裡？", "有目標的人，撐得比較久。"],
+  ["身體還剩下什麼？", "睡眠、飲食、肌力，決定你能承受多少。"],
+  ["哪些零件在抗議？", "部位比症狀更能說明問題。"],
+  ["為什麼卡住？", "這一段最誠實，也最有用。"],
+  ["最後三題。", "然後就給你結果。"]
+];
+
+var STEPS = [
+  { id: "sex", p: 0, sec: 0, type: "chips", label: "生理性別", note: "影響搬運上限與體脂判讀", opts: [["男", {}], ["女", {}]], req: true, refreshes: ["bodyfat"] },
+  { id: "age", p: 0, sec: 0, type: "num", label: "年齡", unit: "歲", min: 15, max: 90, ph: "例如 43", req: true },
+  { id: "wt", p: 0, sec: 0, type: "num", label: "體重", unit: "公斤", min: 30, max: 200, ph: "例如 82", req: true },
+  { id: "ht", p: 0, sec: 0, type: "num", label: "身高", unit: "公分", min: 120, max: 220, ph: "例如 175", req: true },
+  { id: "bodyfat", p: 0, sec: 0, type: "chips", label: "體脂，大概落在哪個範圍？", note: "不確定就選中間", optsFn: function (since, sex) {
+    return sex === 1
+      ? [["看不太出來", { bf: 18 }], ["一般", { bf: 23 }], ["偏多", { bf: 28 }], ["明顯偏多", { bf: 33 }], ["沒量過", {}]]
+      : [["看不太出來", { bf: 12 }], ["一般", { bf: 17 }], ["偏多", { bf: 22 }], ["明顯偏多", { bf: 27 }], ["沒量過", {}]];
+  }, req: true },
+  { id: "job", p: 0, sec: 0, type: "stack", label: "你的工作，最接近哪一種？", opts: [
+    ["要搬重的東西、抱人、扶人", { act: 1.725, load: 4 }],
+    ["長時間站著，走動不多", { act: 1.55, held: 4 }],
+    ["坐辦公室，偶爾走動", { act: 1.375, held: 3 }],
+    ["反覆做同一個動作（包裝、打字、組裝）", { act: 1.55, held: 3, loop: 1 }],
+    ["開車、送貨，上下車頻繁", { act: 1.55, load: 2, held: 2 }],
+    ["自由業、家務、帶小孩，雜項很多", { act: 1.55, load: 2, held: 1 }]
+  ], req: true },
+
+  { id: "sitHours", p: 1, sec: 1, type: "chips", label: "一天坐著的時間", note: "含通勤與回家", opts: [
+    ["幾乎不坐", { sit: 1, held: 0 }],
+    ["2–4 小時", { sit: 3, held: 1 }],
+    ["5–7 小時", { sit: 6, held: 2, clock: 1 }],
+    ["8 小時以上", { sit: 9, held: 3, push: 1 }]
+  ], req: true },
+  { id: "walk", p: 1, sec: 1, type: "chips", label: "一天大概走幾步", note: "手機健康 App 就有", opts: [
+    ["不到 2,000 步", { steps: 1500, held: 2, clock: 1 }],
+    ["2,000–5,000 步", { steps: 3500, held: 1 }],
+    ["5,000–8,000 步", { steps: 6500 }],
+    ["8,000 步以上", { steps: 10000 }]
+  ], req: true },
+  { id: "climb", p: 1, sec: 1, type: "chips", label: "工作上需要爬樓梯或走斜坡嗎？", opts: [
+    ["幾乎沒有", {}],
+    ["偶爾", { held: 1 }],
+    ["每天都要", { load: 2 }],
+    ["要，而且要拿東西", { load: 3, push: 1 }]
+  ], req: true },
+  { id: "lift", p: 1, sec: 1, type: "chips", label: "一次要搬多重的東西？", note: "含抱小孩、扶病人", opts: [
+    ["幾乎不用搬", {}],
+    ["5 公斤以下，但很常搬", { held: 1 }],
+    ["6–15 公斤", { load: 2 }],
+    ["16 公斤以上", { load: 3, push: 1 }]
+  ], req: true },
+
+  { id: "goal", p: 2, sec: 2, type: "stack", label: "如果只能先解決一件事，你會選哪個？", opts: [
+    ["痠痛不要一直回來", { loop: 2 }],
+    ["不要再那麼容易累", { push: 1, clock: 1 }],
+    ["體重或體態", { push: 2 }],
+    ["工作撐得久一點，不要那麼快沒力", { push: 2 }],
+    ["說不上來，就覺得身體在退化", { clock: 2 }]
+  ], req: true },
+  { id: "dur", p: 2, sec: 2, type: "chips", label: "這個狀況多久了？", note: "影響建議強度", opts: [
+    ["不到三個月", { since: 3 }],
+    ["三個月到一年", { since: 12, clock: 1 }],
+    ["一到三年", { since: 24, loop: 1, clock: 1 }],
+    ["三年以上", { since: 48, loop: 2, push: 1 }]
+  ], req: true },
+  { id: "pace", p: 2, sec: 2, type: "chips", label: "你希望多久看到差別？", note: "我們會依這個調整建議", optsFn: function (since) {
+    return since < 12
+      ? [["三個月內就好", { clock: 1 }], ["半年內", { push: 1 }], ["一年內", { push: 2 }], ["沒想過要多久", { clock: 2 }]]
+      : [["三個月內就要有差", { push: 2 }], ["半年內", { push: 1 }], ["一年內", { clock: 1 }], ["沒想過，先做再說", {}]];
+  }, req: true },
+  { id: "first", p: 2, sec: 2, type: "stack", label: "身體第一次出聲，是什麼時候？", opts: [
+    ["工作中突然扭到或拉傷", { loop: 1, push: 1 }],
+    ["不知不覺就越來越痠", { loop: 2 }],
+    ["換了工作或職位之後", { clock: 1, held: 1 }],
+    ["生完小孩、或體重變化之後", { push: 1, load: 1 }],
+    ["想不起來，好像一直都有", { loop: 1, clock: 1 }]
+  ], req: true },
+  { id: "recur", p: 2, sec: 2, type: "chips", label: "這兩年，同樣的狀況發作幾次？", opts: [
+    ["沒有，這是第一次", { loop: 0 }],
+    ["一兩次", { loop: 2 }],
+    ["三到五次", { loop: 3, push: 1 }],
+    ["數不清，幾乎沒停過", { loop: 3, clock: 2 }]
+  ], req: true },
+
+  { id: "sleep", p: 3, sec: 3, type: "chips", label: "平均睡幾個小時？", opts: [
+    ["不到 5 小時", { clock: 2, push: 1 }],
+    ["5–6 小時", { clock: 1, push: 1 }],
+    ["7–8 小時", {}],
+    ["超過 8 小時，但還是累", { push: 1 }]
+  ], req: true },
+  { id: "diet", p: 3, sec: 3, type: "chips", label: "你現在的飲食，最接近哪一種？", opts: [
+    ["外食為主，沒特別挑", { push: 1 }],
+    ["會注意，但常常做不到", { clock: 1 }],
+    ["有在控制，算穩定", {}],
+    ["吃得很少，或常跳過一餐", { push: 2 }]
+  ], req: true },
+  { id: "meal", p: 3, sec: 3, type: "chips", label: "一天吃幾餐？", opts: [
+    ["一餐或兩餐", { push: 1 }],
+    ["三餐", {}],
+    ["三餐加點心", {}],
+    ["不一定，看當天忙不忙", { clock: 1 }]
+  ], req: true },
+  { id: "strength", p: 3, sec: 3, type: "chips", label: "除了工作，有在做肌力訓練嗎？", note: "影響「撐得住」的能力", opts: [
+    ["完全沒有", { push: 1 }],
+    ["偶爾，沒固定", { clock: 1 }],
+    ["每週一到兩次", {}],
+    ["每週三次以上", {}]
+  ], req: true },
+
+  { id: "pain", p: 4, sec: 4, type: "stack", label: "最常不舒服的位置是哪裡？", note: "選最明顯的一個", opts: [
+    ["頸部、肩膀", { held: 2 }],
+    ["下背、腰", { load: 2, held: 1 }],
+    ["膝蓋", { load: 3 }],
+    ["手腕、手肘", { held: 2, loop: 1 }],
+    ["腳踝、腳底", { held: 2, load: 1 }],
+    ["說不上來，全身都有", { loop: 1, push: 1 }]
+  ], req: true },
+  { id: "sore", p: 4, sec: 4, type: "chips", label: "運動後痠痛，你通常怎麼處理？", opts: [
+    ["照常上班，撐過去", { push: 2 }],
+    ["休息幾天就好了", {}],
+    ["吃止痛藥或貼布繼續做", { push: 1 }],
+    ["本來就不太運動", { clock: 1 }]
+  ], req: true },
+  { id: "recover", p: 4, sec: 4, type: "chips", label: "痠痛大概多久會自己好？", opts: [
+    ["一天內", { loop: 0 }],
+    ["兩三天", { loop: 1 }],
+    ["一週以上", { loop: 2 }],
+    ["不會好，一直都有", { loop: 3, clock: 1 }]
+  ], req: true },
+
+  { id: "tried", p: 5, sec: 5, type: "multi", label: "為了這個狀況，你試過什麼？", note: "可多選", opts: [
+    ["貼布、藥膏", { push: 1 }],
+    ["推拿、整脊、按摩", { loop: 1 }],
+    ["看醫生、復健", { loop: 1 }],
+    ["買護具、換椅子或枕頭", { loop: 1 }],
+    ["開始運動或減重", { push: 1 }],
+    ["什麼都還沒試", { clock: 2 }, true]
+  ], req: true },
+  { id: "care", p: 5, sec: 5, type: "multi", label: "以下這些情況，你有嗎？", note: "可多選，用來判斷要不要先就醫", opts: [
+    ["手或腳會麻", { flag: 1 }],
+    ["某個動作明顯沒力，東西拿不住", { flag: 1 }],
+    ["晚上會被痛醒", { flag: 1 }],
+    ["痛會沿著腿或手延伸下去", { flag: 1 }],
+    ["半年內體重莫名下降", { flag: 1 }],
+    ["正在復健，或半年內開過刀", { flag: 1 }],
+    ["以上都沒有", {}, true]
+  ], req: true },
+  { id: "ask", p: 5, sec: 5, type: "stack", label: "你曾經為了這件事，跟誰開口嗎？", opts: [
+    ["沒有，講了也沒用", { push: 3 }],
+    ["有，但對方覺得沒那麼嚴重", { push: 2, loop: 1 }],
+    ["有，同事或家人有幫我", { loop: 1 }],
+    ["有，公司有調整我的工作", {}]
+  ], req: true },
+
+  { id: "want", p: 6, sec: 6, type: "stack", label: "接下來三個月，你最想做到什麼？", opts: [
+    ["工作結束時，還有一點力氣", { push: 1 }],
+    ["痠痛不要再來", { loop: 1 }],
+    ["體重或體態有變化", { load: 1 }],
+    ["建立一個做得到的習慣", { clock: 1 }],
+    ["先不要惡化就好", { push: 1, clock: 1 }]
+  ], req: true },
+  { id: "ready", p: 6, sec: 6, type: "chips", label: "每週你願意花多少時間？", note: "老實回答，不用逞強", opts: [
+    ["每天 5 分鐘", { clock: 0 }],
+    ["每次 20 分鐘，兩次", { clock: 1 }],
+    ["每次 40 分鐘，三次", {}],
+    ["現在真的排不出來", { clock: 2, push: 1 }]
+  ], req: true },
+  { id: "remind", p: 6, sec: 6, type: "stack", label: "如果要提醒自己，哪句話最有用？", req: true, opts: [
+    ["痛了就要停", { push: 1 }],
+    ["先做 90 秒就好", { clock: 1 }],
+    ["這次要撐過不痛之後的四週", { loop: 1 }],
+    ["我不要再從零開始", { loop: 1, push: 1 }]
+  ] }
+];
+
+var TOTAL_PAGES = 7;
+var byId = {};
+STEPS.forEach(function (f) { byId[f.id] = f; });
+
+var A = {};
+var SI = -1;
+var T0 = Date.now();
+var UTM = {};
+var SENT = false;
+var PENDING = null;
+
+function sinceVal() {
+  return A.dur && typeof A.dur.since === "number" ? A.dur.since : 0;
+}
+function sexVal() {
+  return A.sex && A.sex.sex === 1 ? 1 : 0;
+}
+function optsOf(f) {
+  if (!f.optsFn) return f.opts;
+  return f.optsFn(sinceVal(), sexVal());
+}
+function isExcl(o) { return o.length > 2 && o[2] === true; }
+function getVal(f) {
+  var v = A[f.id];
+  if (v == null) return null;
+  return v[f.id];
+}
+function fieldDone(f) {
+  var v = A[f.id];
+  if (!f.req) return true;
+  if (f.type === "multi") return Array.isArray(v) && v.length > 0;
+  if (f.type === "num") return v && Number(v[f.id]) > 0;
+  return v != null && getVal(f) != null;
+}
+function pageDone(p) {
+  return STEPS.filter(function (f) { return f.p === p; }).every(fieldDone);
+}
+function save() {
+  try { localStorage.setItem(CONFIG.storageKey, JSON.stringify({ si: SI, A: A, t0: T0, ts: Date.now() })); } catch (e) {}
+}
+function loadSaved() {
+  try {
+    var raw = localStorage.getItem(CONFIG.storageKey);
+    if (!raw) return null;
+    var d = JSON.parse(raw);
+    if (!d || typeof d !== "object") return null;
+    return d;
+  } catch (e) { return null; }
+}
+function wipe() { try { localStorage.removeItem(CONFIG.storageKey); } catch (e) {} }
+function grabUTM() {
+  var q = new URLSearchParams(location.search);
+  ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"].forEach(function (k) {
+    var v = q.get(k); if (v) UTM[k] = v;
+  });
+}
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+function fmt(n) { return Number(n).toLocaleString("zh-TW"); }
+function flash() {
+  var s = document.getElementById("save");
+  if (!s) return;
+  s.classList.add("on");
+  setTimeout(function () { s.classList.remove("on"); }, 1400);
+}
+
+function render() {
+  var el = document.getElementById("body");
+  if (SI < 0) return renderIntro(el);
+  if (SI >= TOTAL_PAGES) return renderResult(el);
+  renderPage(el);
+}
+
+function renderIntro(el) {
+  var saved = loadSaved();
+  var h = '<div class="intro appear">';
+  h += '<div class="paths">';
+  h += '<a class="path on" href="index.html"><b>身體負荷</b><span>人因 · 你每天怎麼用力</span></a>';
+  h += '<a class="path" href="bodytype.html"><b>體態類型</b><span>體重與體脂 · 代謝循環</span></a>';
+  h += "</div>";
+  h += '<h1>你的身體，<br>每天在扛多少？</h1>';
+  h += '<p class="lede">28 題，大約 8 分鐘。不是量體重，是算你每天實際扛的負荷——包含你搬的東西、卡住的姿勢，還有你撐著不看醫生的那些日子。</p>';
+  h += '<ul class="bullets">';
+  h += "<li>你落在六種負荷型態裡的哪一格</li>";
+  h += "<li>為什麼你每次想改，都撐不過三週</li>";
+  h += "<li>你每走一步，膝蓋實際承受幾公斤</li>";
+  h += "<li>你每天至少該起身幾次，才算及格</li>";
+  h += "</ul>";
+  h += '<div class="who">做完會直接給你結果，不用先留資料。想要完整版 PDF 再填 email 就好。</div>';
+  h += '<div class="nav">';
+  if (saved && saved.si > 0 && saved.si < TOTAL_PAGES) {
+    h += '<button class="btn" data-act="resume">繼續上次（第 ' + (saved.si + 1) + " 頁）</button>";
+  } else if (saved && saved.si >= TOTAL_PAGES) {
+    h += '<button class="btn" data-act="again">看上次的結果</button>';
+  } else {
+    h += '<button class="btn accent" data-act="start">開始檢測</button>';
+  }
+  h += "</div>";
+  if (saved && saved.si > 0) {
+    h += '<div style="margin-top:14px"><button class="btn ghost" data-act="fresh" style="width:100%">重新開始</button></div>';
+  }
+  h += "</div>";
+  el.innerHTML = h;
+  var s = el.querySelector('[data-act="start"]');
+  if (s) s.onclick = function () { A = {}; SI = 0; T0 = Date.now(); save(); render(); };
+  var r = el.querySelector('[data-act="resume"]');
+  if (r) r.onclick = function () { A = saved.A || {}; SI = saved.si || 0; T0 = saved.t0 || Date.now(); render(); };
+  var ag = el.querySelector('[data-act="again"]');
+  if (ag) ag.onclick = function () { A = saved.A || {}; SI = TOTAL_PAGES; T0 = saved.t0 || Date.now(); render(); };
+  var fr = el.querySelector('[data-act="fresh"]');
+  if (fr) fr.onclick = function () { wipe(); A = {}; SI = -1; render(); };
+}
+
+function renderPage(el) {
+  var pageFields = STEPS.filter(function (f) { return f.p === SI; });
+  var secIdx = pageFields.length ? pageFields[0].sec : 0;
+  var pct = Math.round(SI / TOTAL_PAGES * 100);
+  var h = "";
+  h += '<div class="bar"><i style="width:' + pct + '%"></i></div>';
+  h += '<div class="meta"><span>第 ' + (SI + 1) + " 頁 / 共 " + TOTAL_PAGES + " 頁</span><span>" + SECS[secIdx] + "</span></div>";
+  h += '<div class="appear">';
+  h += '<div class="sec-tag">' + SECS[secIdx] + "</div>";
+  h += '<h2 class="q">' + esc(HEAD[SI][0]) + "<small>" + esc(HEAD[SI][1]) + "</small></h2>";
+  h += '<div class="fields">';
+  pageFields.forEach(function (f) { h += fieldHTML(f); });
+  h += "</div>";
+  h += '<div class="nav">' + (SI > 0 ? '<button class="btn ghost" data-act="prev">上一頁</button>' : "") +
+    '<button class="btn" data-act="next"' + (pageDone(SI) ? "" : " disabled") + ">" +
+    (SI === TOTAL_PAGES - 1 ? "看我的結果" : "下一頁") + "</button></div>";
+  h += "</div>";
+  el.innerHTML = h;
+  bindPage();
+  window.scrollTo(0, 0);
+}
+
+function fieldHTML(f) {
+  var v = A[f.id];
+  var filled = v != null && (f.type !== "multi" || (Array.isArray(v) && v.length > 0));
+  var h = '<div class="field' + (filled ? " done" : "") + '" data-fid="' + f.id + '">';
+  h += '<div class="f-label"><span>' + esc(f.label) + "</span>" + (f.note ? '<span class="hint">' + esc(f.note) + "</span>" : "") + "</div>";
+  if (f.type === "chips") {
+    var opts = optsOf(f), cur = getVal(f);
+    h += '<div class="chips">';
+    opts.forEach(function (o, i) {
+      h += '<button class="chip' + (cur === i ? " on" : "") + '" data-pick="' + i + '">' + esc(o[0]) + "</button>";
+    });
+    h += "</div>";
+  } else if (f.type === "stack") {
+    var so = optsOf(f), sc = getVal(f);
+    h += '<div class="stack">';
+    so.forEach(function (o, i) {
+      h += '<button class="opt' + (sc === i ? " on" : "") + '" data-pick="' + i + '"><span class="tick"></span><span>' + esc(o[0]) + "</span></button>";
+    });
+    h += "</div>";
+  } else if (f.type === "multi") {
+    var mo = optsOf(f), mc = Array.isArray(v) ? v : [];
+    h += '<div class="stack">';
+    mo.forEach(function (o, i) {
+      h += '<button class="opt' + (mc.indexOf(i) >= 0 ? " on" : "") + '" data-multi="' + i + '"><span class="tick"></span><span>' + esc(o[0]) + "</span></button>";
+    });
+    h += "</div>";
+  } else if (f.type === "num") {
+    var nv = v ? v[f.id] : "";
+    h += '<div class="numwrap"><input type="text" inputmode="numeric" data-num="1" placeholder="' + esc(f.ph || "") + '" value="' + esc(nv) + '"><span>' + esc(f.unit || "") + "</span></div>";
+    h += '<div class="err" data-err="1">請填入 ' + f.min + "–" + f.max + " 之間的數字</div>";
+  }
+  h += "</div>";
+  return h;
+}
+
+function bindPage() {
+  STEPS.filter(function (f) { return f.p === SI; }).forEach(bindField);
+  var nx = document.querySelector('[data-act="next"]');
+  if (nx) nx.onclick = function () { if (!pageDone(SI)) return; SI++; save(); render(); };
+  var pv = document.querySelector('[data-act="prev"]');
+  if (pv) pv.onclick = function () { SI--; save(); render(); };
+}
+
+function refreshNav() {
+  var nb = document.querySelector('[data-act="next"]');
+  if (nb) nb.disabled = !pageDone(SI);
+}
+
+function paintField(id) {
+  var wrap = document.querySelector('[data-fid="' + id + '"]');
+  if (!wrap) return;
+  var tmp = document.createElement("div");
+  tmp.innerHTML = fieldHTML(byId[id]);
+  wrap.parentNode.replaceChild(tmp.firstChild, wrap);
+  bindField(byId[id]);
+  refreshNav();
+}
+
+function bindField(f) {
+  var wrap = document.querySelector('[data-fid="' + f.id + '"]');
+  if (!wrap) return;
+  wrap.querySelectorAll("[data-pick]").forEach(function (b) {
+    b.onclick = function () {
+      var opts = optsOf(f);
+      var i = Number(b.dataset.pick);
+      var obj = {};
+      var src = opts[i][1] || {};
+      Object.keys(src).forEach(function (k) { obj[k] = src[k]; });
+      obj[f.id] = i;
+      obj.label = opts[i][0];
+      A[f.id] = obj;
+      save(); flash(); paintField(f.id);
+      (f.refreshes || []).forEach(function (dep) {
+        var df = byId[dep];
+        var dv = A[dep];
+        if (df && dv != null && df.optsFn) {
+          var o = optsOf(df)[dv[dep]];
+          if (o) {
+            var no = {};
+            var s = o[1] || {};
+            Object.keys(s).forEach(function (k) { no[k] = s[k]; });
+            no[dep] = dv[dep];
+            no.label = o[0];
+            A[dep] = no;
+          }
+        }
+        paintField(dep);
+      });
+      save();
+    };
+  });
+  wrap.querySelectorAll("[data-multi]").forEach(function (b) {
+    b.onclick = function () {
+      var opts = optsOf(f);
+      var i = Number(b.dataset.multi);
+      var cur = Array.isArray(A[f.id]) ? A[f.id].slice() : [];
+      if (isExcl(opts[i])) {
+        cur = cur.indexOf(i) >= 0 ? [] : [i];
+      } else {
+        cur = cur.filter(function (j) { return !isExcl(opts[j]); });
+        var at = cur.indexOf(i);
+        if (at >= 0) cur.splice(at, 1); else cur.push(i);
+      }
+      A[f.id] = cur;
+      save(); flash(); paintField(f.id);
+    };
+  });
+  wrap.querySelectorAll("[data-num]").forEach(function (inp) {
+    inp.oninput = function () {
+      inp.value = inp.value.replace(/[^\d]/g, "").slice(0, 3);
+      var n = Number(inp.value);
+      var err = wrap.querySelector("[data-err]");
+      var ok = inp.value !== "" && n >= f.min && n <= f.max;
+      if (err) err.classList.toggle("on", inp.value !== "" && !ok);
+      if (ok) {
+        var obj = {}; obj[f.id] = n; obj.label = String(n);
+        A[f.id] = obj;
+        wrap.classList.add("done");
+      } else {
+        delete A[f.id];
+        wrap.classList.remove("done");
+      }
+      save();
+      refreshNav();
+    };
+  });
+}
+function ptsOf() {
+  var pts = { push: 0, clock: 0, loop: 0, load: 0, held: 0 };
+  var keys = ["push", "clock", "loop", "load", "held"];
+  STEPS.forEach(function (f) {
+    var v = A[f.id];
+    if (v == null) return;
+    if (f.type !== "chips" && f.type !== "stack" && f.type !== "multi") return;
+    var list = [];
+    if (f.type === "multi") {
+      var idx = Array.isArray(v) ? v : [];
+      idx.forEach(function (i) { list.push(optsOf(f)[i]); });
+    } else {
+      list.push(optsOf(f)[getVal(f)]);
+    }
+    list.forEach(function (o) {
+      if (!o || !o[1]) return;
+      keys.forEach(function (k) {
+        if (typeof o[1][k] === "number") pts[k] += o[1][k];
+      });
+    });
+  });
+  return pts;
+}
+
+function axisMax() {
+  var max = { push: 0, clock: 0, loop: 0, load: 0, held: 0 };
+  var keys = ["push", "clock", "loop", "load", "held"];
+  STEPS.forEach(function (f) {
+    if (f.type !== "chips" && f.type !== "stack" && f.type !== "multi") return;
+    var opts = optsOf(f);
+    keys.forEach(function (k) {
+      var arr = opts.filter(function (o) { return o[1] && typeof o[1][k] === "number"; })
+        .map(function (o) { return o[1][k]; })
+        .sort(function (x, y) { return y - x; });
+      if (!arr.length) return;
+      if (f.type === "multi") {
+        max[k] += arr.slice(0, 3).reduce(function (s, n) { return s + Math.max(0, n); }, 0);
+      } else {
+        max[k] += Math.max(0, arr[0]);
+      }
+    });
+  });
+  ["push", "clock", "loop"].forEach(function (k) { if (max[k] < 1) max[k] = 1; });
+  return max;
+}
+
+function compute() {
+  var pts = ptsOf();
+  var MAX = axisMax();
+  var htN = A.ht ? Number(A.ht.ht) : 0;
+  var wtN = A.wt ? Number(A.wt.wt) : 0;
+  var bmi = htN > 0 && wtN > 0 ? wtN / Math.pow(htN / 100, 2) : null;
+  var sex = sexVal() === 1 ? "f" : "m";
+  var bf = A.bodyfat && typeof A.bodyfat.bf === "number" ? A.bodyfat.bf : null;
+
+  var load = pts.load;
+  var held = pts.held;
+  if (bmi !== null) {
+    if (bmi >= 27) load += 2;
+    else if (bmi >= 24) load += 1;
+    else if (bmi >= 18.5) held += 2;
+    else held += 3;
+  }
+  if (bf !== null && bmi !== null && bmi < 27) {
+    if ((sex === "m" && bf >= 20) || (sex === "f" && bf >= 25)) held += 2;
+  }
+
+  var base = load > held ? "load" : "held";
+  var rate = { push: pts.push / MAX.push, clock: pts.clock / MAX.clock, loop: pts.loop / MAX.loop };
+  var top = Math.max(rate.push, rate.clock, rate.loop);
+  var allZero = pts.push + pts.clock + pts.loop === 0;
+  var block = "loop";
+  if (!allZero) {
+    for (var i = 0; i < ORDER.length; i++) {
+      if (rate[ORDER[i]] >= top) { block = ORDER[i]; break; }
+    }
+  }
+
+  var cared = false;
+  if (Array.isArray(A.care)) {
+    A.care.forEach(function (i) {
+      var o = byId.care.opts[i];
+      if (o && o[1] && o[1].flag === 1) cared = true;
+    });
+  }
+
+  var special = null;
+  if (bmi !== null && bmi < 18.5) special = "under";
+  else if (top < 0.25) special = "keep";
+
+  return {
+    pts: pts, MAX: MAX, rate: rate, base: base, block: block,
+    key: base + "-" + block, special: special, bmi: bmi, sex: sex, bf: bf,
+    wtN: wtN, htN: htN, load: load, held: held, cared: cared, allZero: allZero
+  };
+}
+
+function renderResult(el) {
+  var R = compute();
+  PENDING = R;
+  var T = R.special ? SPECIAL[R.special] : TYPES[R.key];
+  var accent = R.cared ? "var(--warn)" : (R.base === "load" ? "var(--a)" : "var(--b)");
+  var sit = A.sitHours ? A.sitHours.sit : null;
+  var steps = A.walk ? A.walk.steps : null;
+  var wt = R.wtN || null;
+  var isF = R.sex === "f";
+
+  var h = '<div class="appear">';
+  h += '<div class="hero">';
+  h += '<div class="kicker">你的身體負荷報告</div>';
+  h += '<div class="block" style="color:' + accent + '">' + BASES[R.base].name + " × " + AXIS_NAME[R.block] + "</div>";
+  h += "<h1>" + esc(T.name) + "</h1>";
+  h += '<p class="lede">' + esc(T.lede) + "</p>";
+  h += '<div class="matrix"><div class="grid2x3">';
+  ["load-push", "held-push", "load-clock", "held-clock", "load-loop", "held-loop"].forEach(function (k) {
+    var on = k === R.key && !R.special;
+    h += '<div class="cell' + (on ? " on" : "") + '"' + (on ? ' style="background:' + accent + '"' : "") + ">" + TYPES[k].name.replace("型", "") + "</div>";
+  });
+  h += "</div>";
+  h += '<div class="side"><b>' + esc(BASES[R.base].name) + " · " + esc(AXIS_NAME[R.block]) + "</b>" + esc(BASES[R.base].side) + "，" + esc(T.block) + "</div>";
+  h += "</div></div>";
+
+  if (R.cared) {
+    h += '<div class="warn"><h3>先確認，再調整</h3><p>你勾到了需要先排除神經或結構問題的症狀。這份報告的方向可以參考，但請先讓醫師或物理治療師看過，再開始任何訓練或搬運調整。帶著這份結果去，會省下很多時間。</p></div>';
+  }
+
+  h += '<p class="verdict">' + esc(T.verdict) + "</p>";
+  h += '<div class="tags">';
+  T.tags.forEach(function (t) { h += '<span class="tag">' + esc(t) + "</span>"; });
+  h += "</div>";
+  h += '<div class="hr"></div>';
+
+  h += '<div class="s-title">接下來怎麼做</div><ol class="moves">';
+  T.moves.forEach(function (m, i) {
+    h += "<li><i>" + (i + 1) + "</i><div><b>" + esc(m.t) + "</b><p>" + esc(m.d) + "</p></div></li>";
+  });
+  h += "</ol>";
+
+  h += '<div class="quote">' + esc(T.pull) + "</div>";
+
+  h += '<div class="s-title">你的數字</div><div class="nums">';
+  if (R.bmi !== null) {
+    var tag = R.bmi >= 27 ? "肥胖" : R.bmi >= 24 ? "過重" : R.bmi >= 18.5 ? "正常" : "過輕";
+    h += '<div class="row"><div class="k">BMI<small>國健署標準：24 以上過重、27 以上肥胖</small></div><div class="v">' + R.bmi.toFixed(1) + "<em>" + tag + "</em></div></div>";
+  }
+  if (wt) {
+    h += '<div class="row"><div class="k">每走一步，膝蓋承受<small>平地走路約體重的 1.5 倍</small></div><div class="v">' + fmt(Math.round(wt * 1.5)) + "<em>公斤</em></div></div>";
+    h += '<div class="row"><div class="k">上下樓梯，膝蓋承受<small>約體重的 3.5 倍，下樓高於上樓</small></div><div class="v">' + fmt(Math.round(wt * 3.5)) + "<em>公斤</em></div></div>";
+  }
+  if (sit) {
+    h += '<div class="row"><div class="k">你一天坐 ' + sit + ' 小時<small>每 30 分鐘起身一次，不是等累了才動</small></div><div class="v">' + (sit * 2) + "<em>次／日起步</em></div></div>";
+  }
+  if (steps) {
+    var gap = Math.max(0, 7000 - steps);
+    h += '<div class="row"><div class="k">每日步數<small>建議 7,000 步；你目前約 ' + fmt(steps) + " 步</small></div><div class=\"v\">" + (gap > 0 ? fmt(gap) + "<em>步缺口</em>" : "已達標<em></em>") + "</div></div>";
+  }
+  h += '<div class="row"><div class="k">單次搬運建議上限<small>' + (isF ? "女性 10–15 公斤" : "男性 20–25 公斤") + "；貼近身體、不扭腰、理想高度，超過就分兩趟</small></div><div class=\"v\">" + (isF ? "10–15" : "20–25") + "<em>公斤</em></div></div>";
+  h += "</div>";
+
+  if (CONFIG.proofEnabled && PROOF.length) {
+    h += '<div class="s-title">其他人怎麼改的</div><div class="proof">';
+    PROOF.forEach(function (p) { h += "<p>「" + esc(p.text) + "」<br><cite>— " + esc(p.who) + "</cite></p>"; });
+    h += "</div>";
+  }
+
+  if (A.goal) {
+    h += '<div class="s-title">回到你一開始說的</div>';
+    h += '<p style="font-size:15.5px;line-height:1.85;margin:0;color:var(--ink2)">你選的是「' + esc(A.goal.label) + "」。以你現在的負荷型態，先動 <b style=\"color:var(--ink)\">" + esc(T.moves[0].t) + "</b> 這一項，其他都可以等。一次改一件事，才留得住。</p>";
+  }
+
+  if (R.special === "keep") {
+    h += '<div class="warn" style="border-color:var(--b);background:var(--b-soft)"><h3 style="color:var(--b)">半年後再填一次</h3><p>你現在沒有明顯負荷訊號。把這份結果存下來，半年後用同樣的題目再跑一次。變化比絕對值有意義。</p></div>';
+  }
+
+  h += '<div class="cta"><h3>' + esc(CONFIG.courseName) + "</h3><p>" + esc(CONFIG.courseDesc) + '</p><a href="' + esc(CONFIG.ctaUrl) + '" target="_blank" rel="noopener">' + esc(CONFIG.ctaLabel) + '</a><div class="note">實體講座 · 名額有限</div></div>';
+
+  h += '<div class="gate"><h3>把完整版帶走</h3><p>PDF 內含：你的六型處方全文、搬運上限對照表、久坐分段動作、三週追蹤表。</p>';
+  h += '<input type="email" id="g-email" placeholder="你的 email" autocomplete="email" inputmode="email">';
+  h += '<button class="btn accent" id="g-send">寄給我</button>';
+  h += '<div class="ok" id="g-ok">已收到，檔案會寄到你的信箱。</div>';
+  h += '<div class="privacy">只用來寄這份檔案與後續的人因內容，不會賣給別人，隨時可以退訂。</div></div>';
+
+  h += '<div class="share"><button data-act="card">下載結果圖卡</button><button data-act="copy">複製結果摘要</button></div>';
+  h += '<a class="xlink" href="bodytype.html"><b>另一條路徑 · 體態類型檢測</b><span>這一頁看的是你怎麼用力。另一頁看的是體重與體脂卡在哪個循環——壓力、作息，還是反覆減重。</span></a>';
+  h += '<div class="foot">本檢測為教育與自我覺察用途，不能取代醫療診斷。有紅旗症狀請先就醫。<br>你的答案只存在這台裝置與匿名統計裡。<br><a href="#" class="again" data-act="again2">重新填一次</a></div>';
+  h += "</div>";
+
+  el.innerHTML = h;
+  bindResult(R, T);
+  save();
+  window.scrollTo(0, 0);
+  submit("", R);
+}
+
+function bindResult(R, T) {
+  var gs = document.getElementById("g-send");
+  if (gs) gs.onclick = function () {
+    var e = document.getElementById("g-email");
+    var v = (e.value || "").trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { e.style.borderColor = "var(--a)"; e.focus(); return; }
+    document.getElementById("g-ok").classList.add("on");
+    gs.disabled = true;
+    gs.textContent = "已寄出";
+    submit(v, R);
+  };
+  var card = document.querySelector('[data-act="card"]');
+  if (card) card.onclick = function () { makeCard(R, T); };
+  var cp = document.querySelector('[data-act="copy"]');
+  if (cp) cp.onclick = function () {
+    var txt = "我的身體負荷型態：" + T.name + "\n" + T.lede + "\n\n" + CONFIG.brand + " · 身體負荷檢測";
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(txt).then(function () { cp.textContent = "已複製"; })
+        .catch(function () { cp.textContent = "複製失敗"; });
+    }
+  };
+  var ag = document.querySelector('[data-act="again2"]');
+  if (ag) ag.onclick = function (ev) { ev.preventDefault(); wipe(); A = {}; SI = -1; SENT = false; render(); };
+}
+
+function answersText() {
+  var out = {};
+  STEPS.forEach(function (f) {
+    var v = A[f.id];
+    if (v == null) return;
+    if (f.type === "multi") {
+      out[f.id] = (Array.isArray(v) ? v : []).map(function (i) {
+        var o = optsOf(f)[i];
+        return o ? o[0] : null;
+      }).filter(Boolean).join("、");
+    } else if (v.label != null) {
+      out[f.id] = v.label;
+    }
+  });
+  return out;
+}
+
+function submit(email, R) {
+  if (!R) return;
+  if (!email && SENT) return;
+  var T = R.special ? SPECIAL[R.special] : TYPES[R.key];
+  var payload = {
+    ts: new Date().toISOString(),
+    type: T.name,
+    base: R.base,
+    block: R.block,
+    push: R.pts.push, clock: R.pts.clock, loop: R.pts.loop,
+    pushRate: Number(R.rate.push.toFixed(3)),
+    clockRate: Number(R.rate.clock.toFixed(3)),
+    loopRate: Number(R.rate.loop.toFixed(3)),
+    loadScore: R.load, heldScore: R.held,
+    bmi: R.bmi === null ? null : Number(R.bmi.toFixed(1)),
+    bf: R.bf,
+    sitHours: A.sitHours ? A.sitHours.sit : null,
+    steps: A.walk ? A.walk.steps : null,
+    cared: R.cared,
+    email: email || "",
+    goal: A.goal ? A.goal.label : "",
+    utm: UTM,
+    answers: answersText(),
+    ua: navigator.userAgent,
+    ref: document.referrer || "",
+    url: location.href,
+    dwell: Math.round((Date.now() - T0) / 1000)
+  };
+  try {
+    var arr = JSON.parse(localStorage.getItem(CONFIG.storageKey + "-outbox") || "[]");
+    arr.push(payload);
+    localStorage.setItem(CONFIG.storageKey + "-outbox", JSON.stringify(arr.slice(-20)));
+  } catch (e) {}
+  if (!email) SENT = true;
+  if (!CONFIG.endpoint) return;
+  try {
+    fetch(CONFIG.endpoint, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    }).catch(function () {});
+  } catch (e) {}
+}
+
+function roundRect(c, x, y, w, h, r) {
+  c.beginPath();
+  c.moveTo(x + r, y);
+  c.arcTo(x + w, y, x + w, y + h, r);
+  c.arcTo(x + w, y + h, x, y + h, r);
+  c.arcTo(x, y + h, x, y, r);
+  c.arcTo(x, y, x + w, y, r);
+  c.closePath();
+}
+
+function wrapText(c, text, x0, y0, maxW, lh) {
+  var line = "", y = y0;
+  for (var i = 0; i < text.length; i++) {
+    var t = line + text[i];
+    if (c.measureText(t).width > maxW && line) {
+      c.fillText(line, x0, y);
+      line = text[i];
+      y += lh;
+    } else {
+      line = t;
+    }
+  }
+  if (line) c.fillText(line, x0, y);
+  return y;
+}
+
+function makeCard(R, T) {
+  var W = 1080, H = 1350;
+  var cv = document.createElement("canvas");
+  cv.width = W; cv.height = H;
+  var x = cv.getContext("2d");
+  var dark = window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches;
+  var bg = dark ? "#131211" : "#FAF8F5";
+  var ink = dark ? "#F2EEE6" : "#1B1F1C";
+  var ink3 = dark ? "#7E766B" : "#8A857C";
+  var line = dark ? "#2E2B27" : "#E4DFD5";
+  var ac = R.cared ? (dark ? "#DDA94F" : "#8C5A12") : R.base === "load" ? (dark ? "#E08464" : "#B4472C") : (dark ? "#63A98C" : "#1E5641");
+
+  var draw = function () {
+    x.fillStyle = bg; x.fillRect(0, 0, W, H);
+    x.fillStyle = ac; x.fillRect(0, 0, W, 10);
+    x.textAlign = "left";
+    x.textBaseline = "top";
+
+    x.fillStyle = ink3;
+    x.font = '600 26px "Noto Sans TC",sans-serif';
+    x.fillText(CONFIG.brand + " ／ 身體負荷檢測", 74, 78);
+
+    x.fillStyle = ac;
+    x.font = '800 30px "Noto Sans TC",sans-serif';
+    x.fillText(BASES[R.base].name + " × " + AXIS_NAME[R.block], 74, 190);
+
+    x.fillStyle = ink;
+    x.font = '900 82px "Noto Sans TC",sans-serif';
+    x.fillText(T.name, 74, 244);
+
+    x.fillStyle = ink3;
+    x.font = '400 31px "Noto Sans TC",sans-serif';
+    wrapText(x, T.lede, 74, 372, W - 148, 52);
+
+    var bars = [["硬撐", R.rate.push], ["沒空", R.rate.clock], ["反覆", R.rate.loop]];
+    var by = 648;
+    bars.forEach(function (b) {
+      x.fillStyle = ink3;
+      x.font = '700 25px "Noto Sans TC",sans-serif';
+      x.fillText(b[0], 74, by);
+      x.fillStyle = line;
+      roundRect(x, 190, by + 6, 700, 16, 8); x.fill();
+      x.fillStyle = ac;
+      var w = Math.max(8, Math.round(700 * Math.min(1, b[1])));
+      roundRect(x, 190, by + 6, w, 16, 8); x.fill();
+      x.fillStyle = ink;
+      x.font = '900 26px "Noto Sans TC",sans-serif';
+      x.fillText(Math.round(b[1] * 100) + "%", 916, by);
+      by += 76;
+    });
+
+    x.fillStyle = ink3;
+    x.font = '400 26px "Noto Sans TC",sans-serif';
+    x.fillText((R.bmi !== null ? "BMI " + R.bmi.toFixed(1) + " · " + (R.bmi >= 27 ? "肥胖" : R.bmi >= 24 ? "過重" : R.bmi >= 18.5 ? "正常" : "過輕") : "BMI 未填"), 74, by + 24);
+
+    if (R.wtN) {
+      x.fillStyle = ink;
+      x.font = '700 26px "Noto Sans TC",sans-serif';
+      x.fillText("每走一步，膝蓋承受 " + fmt(Math.round(R.wtN * 1.5)) + " 公斤", 74, by + 70);
+    }
+
+    x.fillStyle = ink;
+    x.font = '700 34px "Noto Sans TC",sans-serif';
+    wrapText(x, "「" + T.pull + "」", 74, by + 130, W - 148, 56);
+
+    x.fillStyle = line;
+    x.fillRect(74, H - 150, W - 148, 1);
+
+    x.fillStyle = ink3;
+    x.font = '400 24px "Noto Sans TC",sans-serif';
+    x.fillText("28 題 · 8 分鐘 · 免費", 74, H - 112);
+    x.textAlign = "right";
+    x.fillText(CONFIG.site, W - 74, H - 112);
+    x.textAlign = "left";
+
+    cv.toBlob(function (b) {
+      if (!b) return;
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(b);
+      a.download = "身體負荷_" + T.name + ".png";
+      a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+    }, "image/png");
+  };
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(draw).catch(draw);
+  } else {
+    draw();
+  }
+}
+
+(function boot() {
+  grabUTM();
+  var saved = loadSaved();
+  if (saved && saved.A) {
+    A = saved.A;
+    SI = -1;
+    T0 = saved.t0 || Date.now();
+  }
+  render();
+})();
+</script>
+<script>
+(function(){
+  if(location.search.indexOf("embed=1")>=0) document.documentElement.classList.add("embed");
+  function report(){ try{ parent.postMessage({type:"ergo-quiz-h",h:document.documentElement.scrollHeight},"*"); }catch(e){} }
+  window.addEventListener("load",report);
+  window.addEventListener("resize",report);
+  if(window.ResizeObserver){ new ResizeObserver(report).observe(document.body); }
+  var n=0, t=setInterval(function(){ report(); if(++n>12) clearInterval(t); },600);
+})();
+</script></body>
+</html>
