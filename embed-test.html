@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>embed test</title>
+<style>
+body{background:#FAF8F5;font-family:"Noto Sans TC",sans-serif;margin:0;padding:24px}
+.wrap{max-width:860px;margin:0 auto;background:#fff;border-radius:16px;padding:0 32px;box-shadow:0 4px 24px rgba(0,0,0,.02)}
+h2{font-family:"Noto Serif TC",serif;border-left:4px solid #1E5641;padding-left:14px}
+</style></head>
+<body>
+<div class="wrap">
+<h2>身體負荷檢測</h2>
+<div class="ergo-quiz-embed">
+  <iframe id="ergoQuiz" src="https://aicokecolatsai-commits.github.io/ergopt-quiz/index.html?embed=1"
+    title="身體負荷檢測" loading="lazy" scrolling="no"
+    style="width:100%;border:0;height:900px;display:block"></iframe>
+</div>
+<p style="font-size:14px;color:#66625B">載入較慢或畫面空白時，<a href="https://aicokecolatsai-commits.github.io/ergopt-quiz/index.html" target="_blank" rel="noopener">另開視窗檢測</a>。</p>
+</div>
+<script>
+(function(){
+  var f=document.getElementById('ergoQuiz');
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='ergo-quiz-h')return;
+    var h=Math.max(600,Math.min(4000,e.data.h));
+    f.style.height=h+'px';
+  });
+})();
+</script>
+</body></html>

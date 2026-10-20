@@ -1194,7 +1194,7 @@ function makeCard(R, T) {
 <script>
 (function(){
   if(location.search.indexOf("embed=1")>=0) document.documentElement.classList.add("embed");
-  function report(){ try{ parent.postMessage({type:"ergo-quiz-h",h:document.documentElement.scrollHeight},"*"); }catch(e){} }
+  function report(){ try{ var a=document.getElementById("app"),k=a&&a.lastElementChild; var h=k?Math.ceil(k.getBoundingClientRect().bottom+window.scrollY+24):document.documentElement.scrollHeight; parent.postMessage({type:"ergo-quiz-h",h:Math.max(h,480)},"*"); }catch(e){} }
   window.addEventListener("load",report);
   window.addEventListener("resize",report);
   if(window.ResizeObserver){ new ResizeObserver(report).observe(document.body); }
