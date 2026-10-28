@@ -190,7 +190,47 @@ button{font-family:inherit; font-size:inherit; cursor:pointer; border:0; backgro
   border-left:3px solid var(--b);font-size:13.5px;line-height:1.8;color:var(--ink2)}
 .embed body{background:transparent}
 .embed .top{background:transparent;position:static;padding-top:0}
-.embed #app{padding-bottom:24px}</style>
+.embed #app{padding-bottom:24px}
+/* 手機閱讀與操作：保留既有題目、計算及資料儲存邏輯。 */
+:root { --paper:#FAF9F5; --paper2:#F1F2EC; --ink:#173B3D; --ink2:#294B4C; --ink3:#596D6D; --line:#DDDCD3; --b:#0B6F73; --b-soft:#E7F3F1; }
+@media (prefers-color-scheme:dark) {
+  :root { --paper:#131D1D; --paper2:#1C2928; --ink:#EDF5F1; --ink2:#D0DFD9; --ink3:#A8BDB5; --line:#40514C; --card:#20302E; --b:#82CEC2; --b-soft:#253F3A; }
+  .chip.on { color:#102B29; }
+  .btn:not(.ghost), .cta { background:#276E69; color:#fff; }
+}
+#app { padding-left:max(20px, env(safe-area-inset-left)); padding-right:max(20px, env(safe-area-inset-right)); }
+.top { gap:12px; padding-top:max(16px, env(safe-area-inset-top)); }
+.brand, .save { letter-spacing:.03em; }
+.save { text-align:right; }
+.field { opacity:1; }
+.f-label { font-size:16px; }
+.hint, .q small { font-size:14px; }
+.chip, .opt { min-height:48px; font-size:16px; line-height:1.5; }
+.chip { padding:10px 17px; }
+.opt { align-items:center; padding:12px 14px; }
+.tick { margin-top:0; }
+.numwrap input { min-height:48px; }
+.btn { min-height:56px; font-size:16px; }
+.btn.accent { background:#0B6F73; }
+.btn.ghost { color:var(--ink2); }
+.path { min-width:0; }
+.path b { font-size:16px; }
+.path span { font-size:13px; }
+.gate input { min-height:48px; font-size:16px; }
+.share button { min-height:48px; font-size:15px; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline:3px solid #0D8F95; outline-offset:3px; }
+@media (max-width:360px) {
+  .paths { flex-direction:column; gap:8px; }
+  .path { padding:10px 14px; }
+  .path span { margin-top:1px; }
+  .matrix { flex-wrap:wrap; }
+  .nav { gap:8px; }
+  .btn { padding-left:16px; padding-right:16px; }
+  .share { flex-wrap:wrap; }
+  .share button { flex:1 1 160px; }
+}
+@media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+</style>
 </head>
 <body>
 <div id="app">
@@ -579,7 +619,7 @@ function renderIntro(el) {
   h += "</ul>";
   h += '<div class="who">做完會直接給你結果，不用先留資料。想要完整版 PDF 再填 email 就好。</div>';
   h += '<div class="nav">';
-  if (saved && saved.si > 0 && saved.si < TOTAL_PAGES) {
+  if (saved && saved.si >= 0 && saved.si < TOTAL_PAGES) {
     h += '<button class="btn" data-act="resume">繼續上次（第 ' + (saved.si + 1) + " 頁）</button>";
   } else if (saved && saved.si >= TOTAL_PAGES) {
     h += '<button class="btn" data-act="again">看上次的結果</button>';
@@ -587,7 +627,7 @@ function renderIntro(el) {
     h += '<button class="btn accent" data-act="start">開始檢測</button>';
   }
   h += "</div>";
-  if (saved && saved.si > 0) {
+  if (saved && saved.si >= 0) {
     h += '<div style="margin-top:14px"><button class="btn ghost" data-act="fresh" style="width:100%">重新開始</button></div>';
   }
   h += "</div>";
