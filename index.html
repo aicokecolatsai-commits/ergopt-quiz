@@ -647,7 +647,7 @@ function renderIntro(el) {
   h += "<li>你每走一步，膝蓋實際承受幾公斤</li>";
   h += "<li>你每天至少該起身幾次，才算及格</li>";
   h += "</ul>";
-  h += '<div class="who">做完會直接給你結果，不用先留資料。想要完整版 PDF 再填 email 就好。</div>';
+  h += '<div class="who">做完會直接顯示結果，不用先留聯絡資料。</div>';
   h += '<div class="nav">';
   if (saved && saved.si >= 0 && saved.si < TOTAL_PAGES) {
     h += '<button class="btn" data-act="resume">繼續上次（第 ' + (saved.si + 1) + " 頁）</button>";
@@ -997,15 +997,11 @@ function renderResult(el) {
 
   h += '<div class="cta"><h3>' + esc(CONFIG.courseName) + "</h3><p>" + esc(CONFIG.courseDesc) + '</p><a href="' + esc(CONFIG.ctaUrl) + '" target="_blank" rel="noopener">' + esc(CONFIG.ctaLabel) + '</a><div class="note">實體講座 · 名額有限</div></div>';
 
-  h += '<div class="gate"><h3>把完整版帶走</h3><p>PDF 內含：你的六型處方全文、搬運上限對照表、久坐分段動作、三週追蹤表。</p>';
-  h += '<input type="email" id="g-email" placeholder="你的 email" autocomplete="email" inputmode="email">';
-  h += '<button class="btn accent" id="g-send">寄給我</button>';
-  h += '<div class="ok" id="g-ok">已收到，檔案會寄到你的信箱。</div>';
-  h += '<div class="privacy">只用來寄這份檔案與後續的人因內容，不會賣給別人，隨時可以退訂。</div></div>';
+  h += '<div class="gate"><h3>完整版報告準備中</h3><p>目前尚未提供 PDF 或電子郵件寄送，您可以先下載結果圖卡或複製摘要。</p></div>';
 
   h += '<div class="share"><button data-act="card">下載結果圖卡</button><button data-act="copy">複製結果摘要</button></div>';
   h += '<a class="xlink" href="bodytype.html"><b>另一條路徑 · 體態類型檢測</b><span>這一頁看的是你怎麼用力。另一頁看的是體重與體脂卡在哪個循環——壓力、作息，還是反覆減重。</span></a>';
-  h += '<div class="foot">本檢測為教育與自我覺察用途，不能取代醫療診斷。有紅旗症狀請先就醫。<br>你的答案只存在這台裝置與匿名統計裡。<br><a href="#" class="again" data-act="again2">重新填一次</a></div>';
+  h += '<div class="foot">本檢測為教育與自我覺察用途，不能取代醫療診斷。有紅旗症狀請先就醫。<br>目前的填答資料儲存在這台裝置的瀏覽器中。<br><a href="#" class="again" data-act="again2">重新填一次</a></div>';
   h += "</div>";
 
   el.innerHTML = h;
